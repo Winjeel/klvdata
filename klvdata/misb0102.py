@@ -72,7 +72,17 @@ _object_country_coding = {
 
 
 class UnknownElement(UnknownElement):
-    pass
+    @property
+    def LDSName(self):
+        return "?"
+
+    @property
+    def ESDName(self):
+        return "?"
+
+    @property
+    def UDSName(self):
+        return "?"
 
 
 @UASLocalMetadataSet.add_parser
