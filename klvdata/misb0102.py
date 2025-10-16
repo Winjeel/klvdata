@@ -25,7 +25,8 @@
 
 from klvdata.common import hexstr_to_bytes
 from klvdata.element import UnknownElement
-from klvdata.elementparser import BytesElementParser
+from klvdata.elementparser import MappedElementParser
+from klvdata.elementparser import EnumElementParser
 from klvdata.elementparser import StringElementParser
 from klvdata.misb0601 import UASLocalMetadataSet
 from klvdata.setparser import SetParser
@@ -110,7 +111,7 @@ class SecurityLocalMetadataSet(SetParser):
 
 
 @SecurityLocalMetadataSet.add_parser
-class SecurityClassification(BytesElementParser):
+class SecurityClassification(EnumElementParser):
     """MISB ST0102 Security Classification value interpretation parser.
 
     The Security Classification metadata element contains a value
@@ -125,7 +126,7 @@ class SecurityClassification(BytesElementParser):
     ESDName = ""
     UDSName = ""
 
-    _classification = {
+    enumMap = {
         b'\x01': 'UNCLASSIFIED',
         b'\x02': 'RESTRICTED',
         b'\x03': 'CONFIDENTIAL',
@@ -135,7 +136,7 @@ class SecurityClassification(BytesElementParser):
 
 
 @SecurityLocalMetadataSet.add_parser
-class ClassifyingCountryAndReleasingInstructionCCM(BytesElementParser):
+class ClassifyingCountryAndReleasingInstructionCCM(EnumElementParser):
     """
     """
     key = b'\x02'
@@ -145,7 +146,7 @@ class ClassifyingCountryAndReleasingInstructionCCM(BytesElementParser):
     ESDName = ""
     UDSName = ""
 
-    _classification = _classifying_country_coding
+    enumMap = _classifying_country_coding
 
 
 @SecurityLocalMetadataSet.add_parser
@@ -258,7 +259,7 @@ class ClassificationAndMarkingSystem(StringElementParser):
 
 
 @SecurityLocalMetadataSet.add_parser
-class ObjectCountryCodingMethod(BytesElementParser):
+class ObjectCountryCodingMethod(EnumElementParser):
     """
     """
     key = b'\x0C'
@@ -268,7 +269,7 @@ class ObjectCountryCodingMethod(BytesElementParser):
     ESDName = ""
     UDSName = ""
 
-    _classification = _object_country_coding
+    enumMap = _object_country_coding
 
 
 @SecurityLocalMetadataSet.add_parser
