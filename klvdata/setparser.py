@@ -108,15 +108,19 @@ class SetParser(Element, metaclass=ABCMeta):
         def repeat(items):
             metadata = OrderedDict()
             for item in items:
-                if not hasattr(item, "TAG"):
-                    # Unknown items don't have a tag, so skip
-                    continue
+                if hasattr(item, "TAG"):
+                    tag = item.TAG
+                else:
+                    tag = item.key
 
                 if hasattr(item, 'items'):
                     value = repeat(item.items.values())
-                else:
+                elif hasattr(item.value, 'value'):
                     value = str(item.value.value)
-                metadata[item.TAG] = (item.LDSName, item.ESDName, item.UDSName, value)
+                else:
+                    value = item.value
+
+                metadata[tag] = (item.LDSName, item.ESDName, item.UDSName, value)
 
             return metadata
 
