@@ -297,7 +297,7 @@ class ClassificationComments(StringElementParser):
 
 
 @SecurityLocalMetadataSet.add_parser
-class Version(BytesElementParser):
+class Version(MappedElementParser):
     """
     """
     key = b'\x16'
@@ -306,6 +306,11 @@ class Version(BytesElementParser):
     LDSName = 'Version'
     ESDName = ""
     UDSName = ""
+    _domain = (0, 2**16-1)
+    _range = (0, 2**16-1)
+    _error = None
+    units = 'number'
+
 
 
 @SecurityLocalMetadataSet.add_parser
