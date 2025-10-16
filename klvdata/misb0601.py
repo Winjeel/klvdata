@@ -1292,14 +1292,14 @@ class PlatformSideslipAngleFull(MappedElementParser):
     units = 'degrees'
 
 
-#@UASLocalMetadataSet.add_parser
-# class MIISCoreIdentifier(StringElementParser):
-#     key = b'\x5E'
-#     TAG = 94
-#     UDSKey = "06 0E 2B 34 01 01 01 01 0E 01 04 05 03 00 00 00"
-#     LDSName = "MIIS Core Identifier"
-#     ESDName = ""
-#     UDSName = "Motion Imagery Identification System Core"
+@UASLocalMetadataSet.add_parser
+class MIISCoreIdentifier(BytesElementParser):
+    key = b'\x5E'
+    TAG = 94
+    UDSKey = "06 0E 2B 34 01 01 01 01 0E 01 04 05 03 00 00 00"
+    LDSName = "MIIS Core Identifier"
+    ESDName = ""
+    UDSName = "Motion Imagery Identification System Core"
 
 
 #@UASLocalMetadataSet.add_parser
