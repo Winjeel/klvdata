@@ -97,7 +97,7 @@ class SecurityLocalMetadataSet(SetParser):
     Must be a subclass of Element or duck type Element.
     """
     key, name = b'\x30', "Security Local Metadata Set"
-    key_length = 1
+    key_length = None # A length of None means the key is a variable length BER OID
 
     TAG = 48
     UDSKey = hexstr_to_bytes('06 0E 2B 34 - 02 03 01 01 - 0E 01 03 03 - 02 00 00 00')
